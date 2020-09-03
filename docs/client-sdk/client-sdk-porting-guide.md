@@ -333,7 +333,7 @@ Please refer sdo_sdk_status:
 Cryptography support is a platform offering which enables Client SDK to generate random number, perform encryption, signing, sign verification and so on. The required functionality by the Client SDK is abstracted via a set of APIs declared in file "crypto/include/sdoCryptoHal.h" and "crypto/include/base64.h"
 
 !!! note
-    This section of the document specifies the internal APIs to abstract Crypto implementation from Client SDK and are subject to change.
+    This section of the document specifies the internal APIs to abstract Crypto implementation from Client SDK and is subject to change.
 
 ### Constants
 
@@ -474,7 +474,7 @@ None
 This function fills the random_buffer with random number of size num_bytes.
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 **Parameters**  
 `random_buffer:` pointer to memory to receive random number  
@@ -496,7 +496,7 @@ int32_t crypto_hal_hash(uint8_t hash_type, const uint8_t *buffer,
 This function hashes the contents of the memory pointed to by buffer of size `buffer_length` with `hash_type` algorithm and fills the memory pointed to by `output` of size `output_length` with generated hash.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `hash_type:` This function must support all the hash algorithms identifiers mentioned in SDO_CRYPTO_HASH_TYPE except SDO_CRYPTO_HASH_TYPE_SHA_512 (optional). Client SDK uses SDO_CRYPTO_HASH_TYPE_USED to decide at compile time which hash_type to use - either SDO_CRYPTO_HASH_TYPE_SHA_256 or SDO_CRYPTO_HASH_TYPE_SHA_384.  
@@ -520,7 +520,7 @@ int32_t crypto_hal_hmac(uint8_t hmac_type, const uint8_t *buffer,
 This function HMACs the contents of the memory pointed to by buffer of size `buffer_length` using `key` of size `key_length`, with `hmac_type` algorithm and fills the memory pointed to by `output` of size `output_length` with generated HMAC. 
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `hmac_type`: This function must support all the HMAC algorithms identifiers mentioned in SDO_CRYPTO_HMAC_TYPE except SDO_CRYPTO_HMAC_TYPE_SHA_512 (optional).  Client SDK uses SDO_CRYPTO_HMAC_TYPE_USED to decide at compile time which hmac_type to use - either SDO_CRYPTO_HMAC_TYPE_SHA_256 or SDO_CRYPTO_HMAC_TYPE_SHA_384.  
@@ -550,7 +550,7 @@ int32_t crypto_hal_sig_verify(uint8_t key_encoding, uint8_t key_algorithm,
 This function verifies the ECDSA or RSA signature pointed by `message_signature` of size `message_length` on the data pointed by `message` of size `message_length` with the key material `key_param1` and `key_param2` interpreted according to `key_encoding`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `key_encoding:` SDO_CRYPTO_PUB_KEY_ENCODING_X509 encoding is used for ECDSA and SDO_CRYPTO_PUB_KEY_ENCODING_RSA_MOD_EXP is used for RSA. Please refer SDO_CRYPTO_PUB_KEY_ENCODING  
@@ -581,7 +581,7 @@ This function signs the `message` of size `message_len` and fills the signed dat
 * Signature Length is allocated by Client SDK based on internal define ECDSA_SIGNATURE_MAX_LEN.
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `message:` The message over which sign is to be calculated.  
@@ -608,7 +608,7 @@ int32_t crypto_hal_rsa_encrypt(uint8_t hash_type, uint8_t key_encoding,
 This function encrypts the `clear_text` of size `clear_text_length` with the RSA algorithm using key material `key_param1` and `key_param2`.   
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `hash_type:` mandatory support required for SDO_PK_HASH_SHA256. Please refer SDO_PK_HASH  
@@ -638,7 +638,7 @@ uint32_t crypto_hal_rsa_len(const uint8_t *key_param1,
 This function returns the size of encrypted text using RSA algorithm which uses the key material key_param1 and key_param2.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 **Parameters**  
 `key_param1:` RSA Modulus  
@@ -664,7 +664,7 @@ int32_t crypto_hal_aes_encrypt(const uint8_t *clear_text,
 This function encrypts the `clear_text` of size `clear_text_length` with the AES algorithm using `key` of size `key_length` and fills the `cipher_text` with encrypted content of size `cipher_length`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `clear_text:` pointer to the buffer containing text to be encrypted  
@@ -691,7 +691,7 @@ int32_t crypto_hal_aes_decrypt(uint8_t *clear_text, uint32_t *clear_text_length,
 This function decrypts the `cipher_text` of size `cipher_length` with the AES algorithm using `key` of size `key_length` and fills the `clear_text` with unencrypted content of length `clear_text_lengt`h.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `clear_text:` pointer to the empty buffer to be filled with unencrypted text  
@@ -736,7 +736,7 @@ This array is allocated by using sdo_byte_array_alloc(size_of_buffer) function.
 int32_t crypto_hal_kex_init(void **context)
 ```
 *Description*  
-Client SDK uses DH, ECDH and Asym algorithms to perform key exchange for creating a secure channel between Device and Owner. The configurations are mentioned in Crypto Configuration. The Device is considered as entity B in Key Exchange and the Owner is considered as entity A.  
+Client SDK uses DH, ECDH, and Asym algorithms to perform key exchange for creating a secure channel between Device and Owner. The configurations are mentioned in Crypto Configuration. The Device is considered as entity B in Key Exchange and the Owner is considered as entity A.  
 
 **DH:** This function creates a Key Exchange context by generating a DH key pair. In the later part of Client SDK execution, the public part of the key pair is retrieved using `crypto_hal_get_device_random()` and sent to the owner for generating the shared secret.  
 
@@ -750,7 +750,7 @@ In the later part of Client SDK execution, this buffer is retrieved using `crypt
 As part of Client SDK Ownership Transfer Protocol, the context gets filled in with Owner public key which is used to encrypt this random number. This key exchange is only valid if the owner certificate uses RSA algorithm. This encryption is abstracted with a set of APIs which don’t directly call openssl/mbedTLS APIs. The buffer to be sent to owner is retrieved by calling `crypto_hal_get_device_random()`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `context:` a valid pointer to store the key exchange context.  
@@ -766,7 +766,7 @@ As part of Client SDK Ownership Transfer Protocol, the context gets filled in wi
 This function tears down the key exchange context created by `crypto_hal_kex_init()`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `context:` a valid pointer of key exchange context.  
@@ -790,7 +790,7 @@ This function fills the buffer pointed to by dev_rand_value of size dev_rand_len
 **ASYM:** The buffer generated is abstracted out by Client SDK. The values are retrieved from key_ex_data->_publicB and key_ex_data->_publicB_length  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs or internal data structures which can be reused.  
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs or internal data structures which can be reused.  
 
 *Parameters*  
 `context:` a valid pointer of key exchange context.  
@@ -822,7 +822,7 @@ This function fills the point Qp with the Owner Information and generates an ECD
 `DeviceRandom || OwnerRandom`  
  
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `context:` a valid pointer of key exchange context.  
@@ -864,7 +864,7 @@ int bin_toB64Length(int bin_length)
 This function returns the base64 length corresponding to non-encoded `bin_length`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs  
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs  
 
 *Parameters*  
 `bin_length:` the size of the data to be encoded in base64.
@@ -880,7 +880,7 @@ int b64To_bin_length(int b64Len);
 This function returns the decoded length corresponding to base64 encoded length identified by `b64Len`.  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs  
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs  
 
 *Parameters*  
 `b64Len:` the size of the data to be decoded from base64.  
@@ -905,7 +905,7 @@ This function encodes the data into base64 pointed to by `bin_bytes` of size `bi
 `b64Offset:` base64 encoded data must be filled at b64Bytes + b64Offset  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Return Value*  
 `0` for success  
@@ -920,7 +920,7 @@ int b64To_bin(size_t b64Len, uint8_t *b64bytes, size_t b64Offset,
 This function decodes the base64 data pointed to by `b64bytes` of size `b64Len` at offset `b64Offset` and fills the decoded data in `bin_bytes` of size `bin_length` at offset `bin_offset`  
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses standard mbedTLS/openSSL APIs
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation uses the standard mbedTLS/openSSL APIs
 
 *Parameters*  
 `b64Len:` number of bytes pointed by b64Bytes to be decoded from base64  
@@ -936,10 +936,10 @@ This function decodes the base64 data pointed to by `b64bytes` of size `b64Len` 
  
 ## Network Subsystem API  
 Networking is a platform offering which enables Client SDK to connect to Manufacturer, Rendezvous and Owner over the network. The required functionality by the Client SDK is abstracted via a set of APIs declared in file "network/include/network_al.h".
-Client SDK communicates with Manufacturer, Rendezvous and Owner using REST API. It is not a constraint on the APIs, and the APIs could well be defined to communicate over any protocol.  
+Client SDK communicates with Manufacturer, Rendezvous, and Owner using REST API. It is not a constraint on the APIs, and the APIs could well be defined to communicate over any protocol.  
 
 !!! note
-    This section of the document specifies the internal APIs to abstract Network implementation from Client SDK and are subject to change.
+    This section of the document specifies the internal APIs to abstract Network implementation from Client SDK and is subject to change.
 
 ### Constants
 
@@ -985,10 +985,10 @@ wifi*|Connect to any available WiFi interface.|NULL
 wifi|Connect to the WiFi SSID and password specified by params. |params[0] = SSID
 
 !!! note
-    In existing implementation, Client SDK calls this function with medium as NULL and params as NULL and initializes REST API handling context.
+    In existing implementation, Client SDK calls this function with medium as NULL and params as NULL and initializes the REST API handling context.
 
 !!! note
-    This function may not require a change in implementation for porting to custom platform, as the reference implementation initializes REST context which is used to communicate with Manufacturer/Rendezvous/Owner Server
+    This function may not require a change in implementation for porting to custom platform, as the reference implementation initializes REST context, which is used to communicate with Manufacturer/Rendezvous/Owner Server
 
 *Parameters*  
 `medium:` Refer above table  
@@ -1265,7 +1265,7 @@ This function introduces the delay for `sec` number of seconds
 Storage is a platform offering which enables Client SDK to store the credentials, state of the Client device on the storage medium. The required functionality by the Client SDK is abstracted via a set of APIs declared in file "storage/include/storage_al.h".
 
 !!! note
-    This section of the document specifies the internal APIs to abstract Storage implementation from Client SDK and are subject to change.
+    This section of the document specifies the internal APIs to abstract Storage implementation from Client SDK and is subject to change.
 
 ### Constants
 
